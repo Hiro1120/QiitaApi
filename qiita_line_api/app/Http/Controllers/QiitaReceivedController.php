@@ -42,7 +42,7 @@ class QiitaReceivedController extends Controller{
         try{
             // curlセッションを実行
             $response = curl_exec($curl);
-            //$response = false;
+
             // curlセッションをクローズ
             curl_close($curl);
 

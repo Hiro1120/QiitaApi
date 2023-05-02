@@ -12,7 +12,7 @@ const INSERT_LINE_RESEND_TIME = 0;
 
 class LineSendController extends Controller{
     
-    public function doProc($items, $resend_params = null, $id = null, $request_type = null) {
+    public function doProc($items, $keyword = null, $resend_params = null, $id = null, $request_type = null) {
 
         // LINE APIエンドポイントURL
         $url = config('line.url');
@@ -23,7 +23,7 @@ class LineSendController extends Controller{
 
         if($id === null || $request_type === QIITA_REQUEST_TYPE){
             //メッセージの整形（記事のタイトルとリンク）
-            $message_array = null;
+            $message_array = "【検索キーワード】" . $keyword . PHP_EOL . PHP_EOL;
             $i = 1;
             foreach ($items as $item) {
                 $message_array .= $i++ . ". 【".$item["title"]."】" . PHP_EOL .$item["url"]  . PHP_EOL . PHP_EOL;
@@ -64,8 +64,8 @@ class LineSendController extends Controller{
 
         try{
             // curlセッションを実行
-            //$response = curl_exec($curl);
-            $response = false;
+            $response = curl_exec($curl);
+
             // curlセッションをクローズ
             curl_close($curl);
 

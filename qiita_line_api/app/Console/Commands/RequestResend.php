@@ -72,14 +72,14 @@ class RequestResend extends Command
                 if($items !== null){
                     // LINE APIの呼び出し
                     $line_controller = app()->make(LINE_SEND_CONTROLLER_PATH);
-                    $line_controller->doProc($items, null, $id ,$request_type);
+                    $line_controller->doProc($items, $request, null, $id ,$request_type);
                 }
 
             }elseif($request_type === LINE_REQUEST_TYPE){
 
                 // LINE APIの呼び出し
                 $line_controller = app()->make(LINE_SEND_CONTROLLER_PATH);
-                $line_controller->doProc(null, $request, $id, null);
+                $line_controller->doProc(null, null, $request, $id, null);
 
             }
 
